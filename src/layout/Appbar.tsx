@@ -8,8 +8,6 @@ import { ContactIcon } from '../components/ContactIcon';
 const pathContact = `/contact`
 
 export function Appbar(){
-   
-
     return (
        <>      
             <div className="app-bar">

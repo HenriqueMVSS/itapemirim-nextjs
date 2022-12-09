@@ -15,12 +15,12 @@ export function Layout(props : LayoutProps){
        <main className="content">
          {props.children}
        </main>
-       <footer className="footer">
+       {/* <footer className="footer">
             <Footer/>
-        </footer>
-        <footer className="footer-mobile">
+        </footer> */}
+        {/* <footer className="footer-mobile">
             <FooterMobile />
-        </footer>
+        </footer> */}
 
 
         <style jsx>{`
@@ -58,8 +58,6 @@ export function Layout(props : LayoutProps){
 
             }
        `}</style>
-        
-    
     </>
      
     )
