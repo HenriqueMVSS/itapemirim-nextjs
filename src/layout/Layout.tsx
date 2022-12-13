@@ -15,17 +15,11 @@ export function Layout(props : LayoutProps){
        <main className="content">
          {props.children}
        </main>
-       {/* <footer className="footer">
-            <Footer/>
-        </footer> */}
-        {/* <footer className="footer-mobile">
-            <FooterMobile />
-        </footer> */}
-
-
+  
         <style jsx>{`
 
         .content {
+            padding-top:80px;
             margin: auto;
             max-width: 980px;
         }

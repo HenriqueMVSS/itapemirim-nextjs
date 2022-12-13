@@ -1,12 +1,15 @@
-export type PostView = {
+import {remark} from "remark"
+import html from 'remark-html'
+
+export type PostViewProps = {
     image?:string;
     authorAvatar?:string;
     authorUsername:string;
     content:string;
-    publishDate:Date;
+    publishDate:string;
 }
 
-export function PostView({image ,authorAvatar, authorUsername, content , publishDate}: PostView) {
+export function PostView({image ,authorAvatar, authorUsername, content , publishDate}: PostViewProps) {
     return (
         <div className="post-view">
             <div className="image-container row">
@@ -20,7 +23,7 @@ export function PostView({image ,authorAvatar, authorUsername, content , publish
                 <div className="content-item" dangerouslySetInnerHTML={{__html: content}} />
               
                 <div className="content-item">
-                    <time dateTime={publishDate.toJSON()}><b>Data da publicação: </b>{publishDate.toLocaleDateString("pt-br")}</time>
+                    <time dateTime={new Date(publishDate).toJSON()}><b>Data da publicação: </b>{new Date(publishDate).toLocaleDateString("pt-br")}</time>
                 </div>
             </div>
 
@@ -30,7 +33,7 @@ export function PostView({image ,authorAvatar, authorUsername, content , publish
                 border-radius: 8px;
                 border: 1px solid #ccc;
                 display: flex;
-                max-height: 900px;
+                max-height: 800px;
                 box-sizing: border-box;
               }
 
@@ -55,6 +58,7 @@ export function PostView({image ,authorAvatar, authorUsername, content , publish
                 flex: 1;
                 overflow-x: auto;
                 padding: 8px;
+                margin-bottom:30px;
               } 
 
               @media(max-width: 600px){
