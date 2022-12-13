@@ -27,12 +27,14 @@ export function Header({description, avatar, name} : HeaderProps){
 
                 .header {
                     display:flex;
+                    color: rgb(241,210,16);
                 }
-
-                .img-avatar {
-                    width:180px;
+                
+                .avatar {
+                    padding-bottom: 10px;
                     border-radius: 90px;
                 }
+
 
                 .item:not(:first-child) {
                     margin-top: 4px;

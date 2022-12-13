@@ -144,6 +144,7 @@ export function Form() {
             .form-title {
                 text-align:center;
                 font-size:22px;
+                color: rgb(241,210,16);
             }
 
             .field {
@@ -181,17 +182,17 @@ export function Form() {
 
             .form-button {
                 padding: 12px 18px;
-                color:rgba(255,222,0,255);
+                color:rgba(4,4,2,0.9);
                 border: none;
                 border-radius:4px;
                 margin-top:12px;
-                background-color: rgba(4,4,2,0.9);
+                background-color: rgba(255,222,0,255);
             }
 
             .form-button:hover {
              cursor: pointer;
-             background-color: rgba(255,222,0,255);
-             color:rgba(4,4,2,0.9);
+             background-color: rgba(4,4,2,0.9);
+             color:rgba(255,222,0,255);
              transition: 0.9s;
             }
 

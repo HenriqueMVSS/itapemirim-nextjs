@@ -32,7 +32,7 @@ export function Feed({items, pagination}: FeedProps) {
             <style jsx>{`
                 .feed {
                     padding: 16px 10px;
-            
+                    background-color: rgb(241,210,16);
                 }
 
                 .feed-grid {
@@ -161,11 +161,11 @@ function Pagination({
             width: 36px;
             height: 36px;
             border-radius: 18px;
-            background-color: rgba(4,4,2,0.9);
+            background-color: #fcec6d;
             font-size: 12px;
           }
           .current-page {
-            background-color: rgb(241,210,16);
+            background-color: rgba(4,4,2,0.9);
             color: rgba(4,4,2,0.9);
           }
           .pagination-link:hover {
