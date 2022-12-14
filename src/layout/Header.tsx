@@ -11,7 +11,7 @@ export function Header({description, avatar, name} : HeaderProps){
         <div className="header">
             <div className="row">
                 <div className="avatar item">
-                    <Avatar />
+                    <Avatar src={avatar} size={150} alt=''/>
                 </div>
             </div>
             <div className="row">
@@ -35,18 +35,19 @@ export function Header({description, avatar, name} : HeaderProps){
                     border-radius: 90px;
                 }
 
-
                 .item:not(:first-child) {
                     margin-top: 4px;
                 }
 
                 .name {
-                    font-size: 20px;
+                    font-size: 17px;
                     font-weight: bold;
                 }
 
                 .description {
                     margin: 0 10px;
+                    margin-bottom: 10px;
+                    font-size: 15px;
                 }
 
                 @media(max-width: 900px) {
@@ -54,7 +55,7 @@ export function Header({description, avatar, name} : HeaderProps){
                         flex-direction:column;
                         align-items:center;
                     }
-
+                    
                     .name {
                         text-align: center;
                     }
@@ -65,22 +66,14 @@ export function Header({description, avatar, name} : HeaderProps){
                         flex-direction:row;  
                     }
 
-                    .row {}
-
-                    .img-avatar {
-                        width:256px;
-                        display:flex;
-                        align-items:center;
-                    }
-
                     .name {
                       padding: 10px 0 0 0;
-                      font-size: 23px
+                      font-size: 18px
                     }
 
                     .description {
                         padding-top:15px;
-                        font-size: 20px
+                        font-size: 16px
                     }
                 }
                 
