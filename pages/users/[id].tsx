@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from "next"
-import { PrismaClient, User } from '@prisma/client'
-const prisma = new PrismaClient()
+import { p } from '../../src/prismaClient'
+import { User } from "@prisma/client";
 
 export type UsersPageProps =User;
 
@@ -19,13 +19,13 @@ type UserQuery = {
 }
 
 export const getStaticPaths:GetStaticPaths<UserQuery> = async () => { 
-  const usersIds = await prisma.user.findMany({
+  const usersIds = await p.user.findMany({
     select: {
       id: true,
     }
   })
   return {
-    paths: usersIds.map((user) => ({
+    paths: usersIds.map((user : any) => ({
       params: {id: user.id.toString()}
     })),
     fallback: false,
@@ -33,7 +33,7 @@ export const getStaticPaths:GetStaticPaths<UserQuery> = async () => {
 }
 
 export const getStaticProps:GetStaticProps<UsersPageProps, UserQuery> = async ({params}) => { 
-  const user = await prisma.user.findFirst({
+  const user = await p.user.findFirst({
     where: {
       id: Number(params?.id)
     }

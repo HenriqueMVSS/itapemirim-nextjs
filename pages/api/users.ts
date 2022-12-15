@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { PrismaClient, User } from '@prisma/client'
-const prisma = new PrismaClient()
+import { p } from '../../src/prismaClient'
 
 export default async function users(req: NextApiRequest, res: NextApiResponse) {
-  const users = await prisma.user.findMany();
+  const users = await p.user.findMany();
   res.status(200).json(users);
 }

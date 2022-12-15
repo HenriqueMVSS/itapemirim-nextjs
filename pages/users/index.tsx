@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
-import { PrismaClient, User } from '@prisma/client'
-const prisma = new PrismaClient()
+import {  User } from '@prisma/client'
+import { p } from '../../src/prismaClient'
 
 export type UsersPageProps = {
   users: User[]
@@ -18,7 +18,7 @@ export default function UsersPage({users}: UsersPageProps){
 }
 
 export const getServerSideProps: GetServerSideProps<UsersPageProps> = async()=> {
-  const users = await prisma.user.findMany();
+  const users = await p.user.findMany();
   return {
     props: {
       users,
