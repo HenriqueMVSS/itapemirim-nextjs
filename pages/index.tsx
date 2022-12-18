@@ -6,7 +6,7 @@ import type { GetServerSideProps, GetStaticProps } from 'next'
 import { FooterMobile } from '../src/components/FooterMobile'
 import { Header, HeaderProps } from '../src/layout/Header'
 import {apolloClient, gql} from '../src/apolloClient'
-import { userInfo } from 'os'
+import { useSession } from "next-auth/react";
 
 
 export type HomeProps = { 
@@ -16,6 +16,8 @@ export type HomeProps = {
 }
 
 export default function Home({posts, pagination, userInfo}:HomeProps) {
+  const { data, status } = useSession();
+
   return (
     <article>
       <Head>

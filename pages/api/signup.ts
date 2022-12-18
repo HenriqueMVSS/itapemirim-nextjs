@@ -1,18 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import * as userRepository from "../../src/user/userRepository";
+import { allowedProviders } from "../../src/auth/allowedProviders";
+import { endpoint } from "../../src/endpoint";
 
-export default async function signupHandler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === "POST") {
+export default endpoint({
+  async post(req, res) {
+    req.body && (req.body.provider = allowedProviders.credentials);
     const results = await userRepository.create(req.body, {
       select: {
         id: true,
       },
     });
-    return res.status(200).json(results);
+    return [200, results];
   }
-
-  return res.status(200).json({});
-}
+});  

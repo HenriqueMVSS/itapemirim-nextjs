@@ -1,26 +1,15 @@
 import { z, ZodIssue } from "zod";
 import { useZorm } from "react-zorm";
 import useAxios from "axios-hooks";
-import { userSchema, UserSchema } from "../schemas/userSchema";
-import {MdHourglassBottom, MdHourglassTop} from "react-icons/md"
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-
-function LoadingIndicator() {
-  const [top, setTop] = useState(true);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => setTop(!top), 500);
-    return () => clearTimeout(timeoutId);
-  }, [top]);
-
-  return top ? (
-    <MdHourglassTop size="16px" color="#2139e0" />
-  ) : (
-    <MdHourglassBottom size="16px" color="#2139e0" />
-  );
-}
+import {
+  baseUserSchema,
+  BaseUserSchema,
+} from "../../user/schemas/baseUserSchema"
+import { passwordSchema } from "../../user/schemas/base/passwordSchema";
+import { signIn } from "next-auth/react";
+import { allowedProviders } from "../allowedProviders";
+import { LoadingIndicator } from "../../components/LoadingIndicator";
 
 const texts = {
   title: "Criar conta",
@@ -30,8 +19,9 @@ const texts = {
   submitFailure: "Houve um erro ao criar sua conta",
 };
 
-const signupSchema = userSchema
+const signupSchema = baseUserSchema
   .extend({
+    password: passwordSchema,
     confirmPassword: z.string().min(0),
   })
   .refine(({ password, confirmPassword }) => password === confirmPassword, {
@@ -40,8 +30,8 @@ const signupSchema = userSchema
   });
 
 export function SignUpForm() {
-  const router = useRouter();
-  const [{data, loading}, execute] = useAxios<{ user: { id: number }; errors: ZodIssue[] }, UserSchema>(
+  
+  const [{data, loading}, execute] = useAxios<{ user: { id: number }; errors: ZodIssue[] },  BaseUserSchema>(
     {
       url: "/api/signup",
       method: "POST",
@@ -68,7 +58,10 @@ export function SignUpForm() {
             color: "#f9f9f9",
           },
         });
-        router.push("/");
+        signIn(allowedProviders.credentials, {
+          username: event.data.email,
+          password: event.data.password,
+        });
       } else {
         toast(texts.submitFailure, {
           closeButton: false,
@@ -139,7 +132,11 @@ export function SignUpForm() {
         <ErrorMessage message={error.message} />
       ))}
       <button disabled={disabled} type="submit" className="signup-submit">
-        {loading ? <LoadingIndicator /> : texts.submit}
+        {loading ? (
+          <LoadingIndicator size="16px" color="#2139e0" />
+            ) : (
+          texts.submit
+        )}
       </button>
       <style jsx>{`
         .signup-form {

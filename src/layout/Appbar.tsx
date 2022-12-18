@@ -1,13 +1,16 @@
 import React from "react";
 import { ItaLogo } from "../components/ItaLogo";
-import { SearchBar } from "../components/SearchBar";
 import Link from "next/link";
 import { HomeIcon } from "../components/HomeIcon";
 import { ContactIcon } from '../components/ContactIcon';
+import { GrLogout, GrLogin, GrChat } from "react-icons/gr";
+import { FaCashRegister } from "react-icons/fa";
+import { signOut, useSession } from "next-auth/react";
 
 const pathContact = `/contact`
 
 export function Appbar(){
+    const { data, status } = useSession();
     return (
        <>      
             <div className="app-bar">
@@ -22,13 +25,45 @@ export function Appbar(){
                     <div className="row">
                        <Link href={__dirname}><HomeIcon/></Link> 
                     </div>
-                    <div className="row">
-                         <Link href={pathContact}><ContactIcon /></Link>
+                                
+                {status === "authenticated" && (
+                    <>
+                     <a className="contact" href={pathContact} title="Contato">
+                        <ContactIcon aria-label="Contato" />
+                     </a>
+                     <div className="register-login">
+                       
+                        <a
+                        href="/api/auth/signout"
+                        className="item"
+                        title="Sair"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            signOut();
+                        }}
+                        >
+                        <GrLogout size="22px" aria-label="Sair" />
+                        </a>
+                        
                     </div>
+                  </>
+                )}
+                {status === "unauthenticated" && (
+                   <>
+                    <div className="register-login">
+                            <a className="item" href="/signup" title="Criar conta">
+                            <FaCashRegister size="22px" aria-label="Entrar" />
+                            </a>
+                    
+                            <a className="item" href="/api/auth/signin" title="Entrar">
+                            <GrLogin size="22px" aria-label="Entrar" />
+                            </a>
+                    </div>
+                   </> 
+                )}
                 </div>
             </div>
-           
-            
+
                 <style jsx>{`
                     .app-bar{
                         width:100%;
@@ -41,6 +76,10 @@ export function Appbar(){
                         padding: 0 8px;
                         box-sizing: border-box;
                         z-index: 1;
+                    }
+
+                    .register-login a{
+                        padding-right: 15px;
                     }
 
                     .content-bar {
