@@ -3,7 +3,7 @@ import { ItaLogo } from "../components/ItaLogo";
 import Link from "next/link";
 import { HomeIcon } from "../components/HomeIcon";
 import { ContactIcon } from '../components/ContactIcon';
-import { GrLogout, GrLogin, GrChat } from "react-icons/gr";
+import { GrLogout, GrLogin } from "react-icons/gr";
 import { FaCashRegister } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 
