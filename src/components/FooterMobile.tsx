@@ -1,18 +1,22 @@
 import Link from "next/link"
 import { HomeIcon } from "./HomeIcon";
 import { ContactIcon } from "./ContactIcon";
+import { useSession } from "next-auth/react";
 
 const pathContact = `/contact`
 
 export function FooterMobile(){
+    const { status } = useSession();  
     return (
        <> 
         <div className="footer">
            <div className="footer-items">
             <div className="content" ><Link href="/"><HomeIcon/></Link></div>
+            {status === "authenticated" && (
             <div className="content"><Link href={pathContact}><ContactIcon/></Link></div>
+            )}
            </div> 
-
+            
         </div>
 
         <style jsx>{`
